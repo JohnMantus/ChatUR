@@ -27,7 +27,7 @@ def Eat():
 @login_required
 def Party():
     events = Event.query.filter_by(type="Party").all()
-    return render_template('EventDisplay.html', events=events)
+    return render_template('EventDisplay.html', events=events, curr_time = datetime.now())
 
 
 
@@ -35,6 +35,6 @@ def Party():
 @login_required
 def Study():
     events = Event.query.filter_by(type="Study").all()
-    return render_template('EventDisplay.html', events=events)
+    return render_template('EventDisplay.html', events=events, curr_time = datetime.now())
 
     return time  > datetime.now()
