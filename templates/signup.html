@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <h3 class="title">Sign Up</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }} Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form action="/signup" method="POST">
+            <div class="field">
+                <input  type="email" name="email" placeholder="Email" autofocus="">
+            </div>
+
+            <div class="field">
+                <input type="text" name="name" placeholder="Name" autofocus="">
+            </div>
+
+            <div class="field">
+                <input  type="password" name="password" placeholder="Password">
+            </div>
+
+            <button>Sign Up</button>
+        </form>
+    </div>
+
+{% endblock %}

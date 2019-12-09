@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-info">
+     <h1>{{ messages[0] }}</h1>
+     </div>
+{% endif %}
+{% endwith %}
+
+<h1 class="title" style="text-align:left; padding-buttom:25px;">  Welcome, {{ name }}! </h1>
+
+<div class="columns">
+  <div class="column">
+    <div class ="tile notification is-info" style ="padding:40px">
+      <div class= "centered">
+        <form method="POST" action="/Eat">
+        <button class="button is-info" style="font-weight: bold; font-size: 25px"" >Eat </button>
+        </form>
+    </div>
+  </div>
+  </div>
+  <div class="column">
+    <div class ="tile notification is-danger" style ="padding:40px">
+        <div class= "centered">
+          <form method="POST" action="/Party">
+          <button class="button is-danger" style="font-weight: bold; font-size: 25px">Party</button>
+          </form>
+          </div>
+          </div>
+          </div>
+  <div class="column">
+    <div class ="tile notification is-warning" style ="padding:40px">
+      <div class= "centered">
+        <form method="POST" action="/Study">
+        <button class="button is-warning" style="font-weight: bold; font-size: 25px" >Study </button>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+<form method="POST" action="/createEvent">
+<button class="button">Create an event</button>
+</form>
+
+{% endblock %}

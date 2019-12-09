@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+
+
+<p>Dear {{ current_user.name }},</p>
+<p>Welcome to <b>ChatUR</b>!</p>
+<p>To confirm your account please <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">click here</a>.</p>
+<p>Alternatively, you can paste the following link in your browser's address bar:</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+<p>Sincerely,</p>
+<p>The ChatUR Team</p>
+<p><small>Note: replies to this email address are not monitored.</small></p>
+
+{% endblock %}

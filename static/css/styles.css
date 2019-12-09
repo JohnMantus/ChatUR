@@ -1,0 +1,14 @@
+.centered{
+  margin : 0 auto;
+  text-align : center;
+}
+
+.tile.notification.is-warning{
+	color: #Grey;
+}
+
+.space{
+	
+	padding: 25px
+
+}

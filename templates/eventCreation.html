@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+
+
+<div class="box">
+<form action="/eventCreated" method="POST">
+    <div class="field">
+      <label for="event"> Event Name: </label>
+        <input  type="text" name="event" placeholder="Event Name" autofocus="">
+    </div>
+
+    <div class="field">
+      <label for="Location"> Location: </label>
+        <input type="text" name="location" placeholder="Address" autofocus="">
+    </div>
+
+    <div class ="field">
+      <label for="date"> Date: </label>
+        <input type="Date" name="date" placeholder="Date" autofocus="">
+    </div>
+
+    <div class ="field">
+      <label for="time"> Time: </label>
+        <input type="time" name="time" autofocus="">
+    </div>
+
+    <div class="field">
+      <label for="types"> Category: </label>
+    <select name="types">
+      <option value="Eat">Eat</option>
+      <option value="Party">Party</option>
+      <option value="Study">Study</option>
+    </select>
+    </div>
+
+    <div class ="field">
+      <label for="description"> Event description: </label>
+      <textarea name="description" rows="4" cols="50"> </textarea>
+    </div>
+
+
+    </div>
+
+
+    <button>Sign Up</button>
+</form>
+
+{% endblock %}

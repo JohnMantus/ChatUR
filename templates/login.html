@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    {% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         {{ message }}
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <h3 class="title">Login</h3>
+    <div class="box">
+        <form method="POST" action="/login">
+            <div class="field">
+                    <input type="email" name="email" placeholder="Your Email" >
+            </div>
+
+            <div class="field">
+                    <input  type="password" name="password" placeholder="Your Password">
+            </div>
+            <div class="field">
+                <label class="checkbox">
+                    <input type="checkbox">
+                    Remember me
+                </label>
+            </div>
+            <button>Login</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}
