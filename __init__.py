@@ -3,16 +3,13 @@ from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-mail = Mail()
 db = SQLAlchemy()
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
-mail = Mail(app)
 
 app.config['SECRET_KEY'] = 'thisismysecretkeydonotstealit'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
