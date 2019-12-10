@@ -2,7 +2,6 @@ beautifulsoup4==4.8.1
 bs4==0.0.1
 Click==7.0
 cycler==0.10.0
-email==4.0.0
 Flask==1.1.1
 Flask-Login==0.4.1
 Flask-SQLAlchemy==2.4.1
