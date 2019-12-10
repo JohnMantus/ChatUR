@@ -6,6 +6,7 @@ from __init__ import db
 import sys
 import datetime
 from flask_login import current_user
+from forms import ChangePasswordForm
 
 
 auth = Blueprint('auth', __name__)
@@ -54,6 +55,20 @@ def signup_post():
 
     return redirect(url_for('auth.login'))
 
+
+@auth.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = form.password.data
+        current_user.password = generate_password_hash(current_user.password, method='sha256')     
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Your password has been updated.')
+        return redirect(url_for('main.index'))
+    
+    return render_template("change_password.html", form=form)
 
 
 @auth.route('/createEvent',methods=['GET','POST'])
