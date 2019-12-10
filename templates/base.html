@@ -38,6 +38,11 @@
                                     Logout
                                 </a>
                                 {% endif %}
+                                {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('auth.change_password') }}" class="navbar-item">
+                                    Change Password
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
