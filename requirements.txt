@@ -3,6 +3,7 @@ bs4==0.0.1
 Click==7.0
 cycler==0.10.0
 Flask==1.1.1
+Flask-Bootstrap==3.3.7.1
 Flask-Login==0.4.1
 Flask-SQLAlchemy==2.4.1
 Flask-WTF==0.14.2
@@ -26,3 +27,4 @@ virtualenvwrapper==4.8.4
 virtualenvwrapper-win==1.2.5
 Werkzeug==0.16.0
 WTForms==2.2.1
+visitor==0.1.3
