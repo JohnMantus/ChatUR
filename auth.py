@@ -5,22 +5,11 @@ from models import User, Event
 from __init__ import db
 import sys
 import datetime
-from email import send_email
 from flask_login import current_user
-from flask_mail import Mail, Message
+
 
 auth = Blueprint('auth', __name__)
 
-@auth.before_app_request
-def before_request():
-    if current_user.is_authenticated and not current_user.confirmed and request.blueprint != 'auth' and request.endpoint != 'static':
-        return redirect(url_for('auth.unconfirmed'))
-
-@auth.route('/unconfirmed')
-def unconfirmed():
-    if current_user.is_anonymous or current_user.confirmed:
-        return redirect(url_for('auth.login'))
-    return render_template('unconfirmed.html')
 
 @auth.route('/login')
 def login():
@@ -62,23 +51,9 @@ def signup_post():
 
     db.session.add(new_user)
     db.session.commit()
-    token = new_user.generate_confirmation_token()
-    send_email(new_user.email, 'Confirm Your Account', 'confirm', user = user, token = token)
-    flash('A confirmation email has been sent to you by email.')
+
     return redirect(url_for('auth.login'))
 
-
-@auth.route('/confirm/<token>"')
-@login_required
-def confirm(token):
-    if current_user.confirmed:
-        return redirect(url_for('auth.login'))
-    if current_user.confirm(token):
-        db.session.commit()
-        flash('You have confirmed your account. Thanks!')
-    else:
-        flash('The confirmation link is invalid or has expired.')
-    return redirect(url_for('auth.login'))
 
 
 @auth.route('/createEvent',methods=['GET','POST'])
