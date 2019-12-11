@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_bootstrap import Bootstrap
 from models import User, Event
-from forms import ChangePasswordForm
+from forms import ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm
 from __init__ import db
 import sys
 import datetime
@@ -143,6 +143,36 @@ def change_password():
         return redirect(url_for('main.index'))
 
     return render_template("change_password.html", form=form)
+
+@auth.route('/reset', methods=['GET', 'POST'])
+def password_reset_request():
+    if not current_user.is_anonymous:
+        return redirect(url_for('main.index'))
+    form = PasswordResetRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            token = user.generate_reset_token()
+            send_email(user.email, 'Reset Your Password', 'reset_password_template', user=user, token=token)
+        flash('An email with instructions to reset your password has been '
+              'sent to you.')
+        return redirect(url_for('auth.login'))
+    return render_template('reset_password.html', form=form)
+
+
+@auth.route('/reset/<token>', methods=['GET', 'POST'])
+def password_reset(token):
+    if not current_user.is_anonymous:
+        return redirect(url_for('main.index'))
+    form = PasswordResetForm()
+    if form.validate_on_submit():
+        if User.reset_password(token, form.password.data):
+            db.session.commit()
+            flash('Your password has been updated.')
+            return redirect(url_for('auth.login'))
+        else:
+            return redirect(url_for('main.index'))
+    return render_template('reset_password.html', form=form)
 
 @auth.route('/eventCreated',methods=['POST'])
 def createEvent():
