@@ -129,6 +129,20 @@ def confirm(token):
 def test():
     return render_template('eventCreation.html')
 
+@auth.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_user.password = form.password.data
+        current_user.password = generate_password_hash(current_user.password, method='sha256')
+        db.session.add(current_user)
+        db.session.commit()
+        flash('Your password has been updated.')
+        return redirect(url_for('main.index'))
+
+    return render_template("change_password.html", form=form)
+
 @auth.route('/eventCreated',methods=['POST'])
 def createEvent():
     eventName = request.form.get("event")
