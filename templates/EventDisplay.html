@@ -44,9 +44,8 @@
         <b>Location: </b> <a style="color: blue">{{ event.location}}</a>.
         </div>
       <br>
-      <time datetime="2016-1-1"> {{ event.date}}</time>
+      <time datetime="2016-1-1"> {{ event.datetime}}</time>
     </div>
-    <div> <p> Time: {{event.time}}</p></div>
     {% if event.datetime < curr_time %}
     <div> <p style="color:red;"> EXPIRED </p> </div>
     {% endif %}
@@ -96,7 +95,6 @@
       <br>
       <time datetime="2016-1-1"> {{ event.datetime}}</time>
     </div>
-    <!-- <div> <p> Time: {{event.time}}</p></div> -->
     {% if event.datetime < curr_time %}
     <div> <p style="color:red;"> EXPIRED </p> </div>
     {% endif %}
