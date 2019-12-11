@@ -36,5 +36,3 @@ def Party():
 def Study():
     events = Event.query.filter_by(type="Study").all()
     return render_template('EventDisplay.html', events=events, curr_time = datetime.now())
-
-    return time  > datetime.now()
