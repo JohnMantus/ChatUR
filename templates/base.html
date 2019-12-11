@@ -43,6 +43,11 @@
                                     Change Password
                                 </a>
                                 {% endif %}
+                                  {% if not current_user.is_authenticated %}
+                                <a href="{{ url_for('auth.password_reset_request') }}" class="navbar-item">
+                                    Reset Password
+                                </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
